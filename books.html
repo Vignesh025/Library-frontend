@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Books</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="booksbody">
+  <!-- Navigation Bar -->
+  <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="">Library</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link" aria-current="page" href="index.html">Home</a>
+                <a class="nav-link" href="books.html">Books</a>
+                <a class="nav-link" href="members.html">Member</a>
+                <a class="nav-link" href="history.html">History</a>
+            </div>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="login.html">Login</a>
+                <a class="nav-link" href="signup.html">Signup</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <h2>Books</h2>
+
+    <!-- Search Bar -->
+    <div class="form-group">
+        <input type="text" class="form-control" id="searchBar" placeholder="Search for books...">
+    </div>
+
+    <!-- Book List -->
+    <ul id="bookList" class="list-group mt-3">
+        <!-- Books will be dynamically inserted here -->
+    </ul>
+
+    <!-- Add Book Form (Visible only to Librarians) -->
+    <div id="addBookSection" class="mt-5" style="display: none;">
+        <h3>Add a New Book</h3>
+        <form id="addBookForm">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" id="title" placeholder="Enter book title" required>
+            </div>
+            <div class="form-group">
+                <label for="author">Author</label>
+                <input type="text" class="form-control" id="author" placeholder="Enter author name" required>
+            </div>
+            <div class="form-group">
+                <label for="isbn">ISBN</label>
+                <input type="text" class="form-control" id="isbn" placeholder="Enter ISBN" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Book</button>
+        </form>
+    </div>
+</div>
+<div id="updateForm" style="display:none; margin-top: 20px;">
+    <h2>Update Book</h2>
+    <input type="hidden" id="update-book-id">
+    <div class="form-group">
+        <label for="update-title">Title</label>
+        <input type="text" class="form-control" id="update-title" placeholder="Book Title">
+    </div>
+    <div class="form-group">
+        <label for="update-author">Author</label>
+        <input type="text" class="form-control" id="update-author" placeholder="Author">
+    </div>
+    <div class="form-group">
+        <label for="update-isbn">ISBN</label>
+        <input type="text" class="form-control" id="update-isbn" placeholder="ISBN">
+    </div>
+    <div class="form-group">
+        <label for="update-status">Status</label>
+        <select id="update-status" class="form-control">
+            <option value="AVAILABLE">Available</option>
+            <option value="BORROWED">Borrowed</option>
+        </select>
+    </div>
+    <button id="update-book-btn" class="btn btn-primary">Update Book</button>
+    <button onclick="document.getElementById('updateForm').style.display='none';" class="btn btn-secondary">Cancel</button>
+</div>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/scripts.js"></script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Borrow History</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body class="loginbody">
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="">Library</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link" aria-current="page" href="index.html">Home</a>
+                    <a class="nav-link" href="books.html">Books</a>
+                    <a class="nav-link" href="members.html">Member</a>
+                    <a class="nav-link" href="history.html">History</a>
+                </div>
+                <div class="navbar-nav ms-auto">
+                    <a class="nav-link" href="login.html">Login</a>
+                    <a class="nav-link" href="signup.html">Signup</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h2>Borrow and Return History</h2>
+        <ul id="historyList" class="list-group mt-3">
+            <!-- History records will be dynamically inserted here -->
+        </ul>
+    </div>
+
+    <script src="js/scripts.js"></script>
+</body>
+</html>
