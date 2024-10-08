@@ -16,17 +16,16 @@ document.addEventListener('DOMContentLoaded', function() {
           headers: {
               'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ username, password }) // Send username instead of email
+          body: JSON.stringify({ username, password }) 
       })
       .then(response => response.json())
       .then(data => {
           if (data.token) {
-              // Save token to local storage or handle successful login
               localStorage.setItem('token', data.token);
               alert('Login successful');
-              window.location.href = 'index.html'; // Redirect to homepage
+              window.location.href = 'index.html'; 
           } else {
-              alert(data.message); // Show error message
+              alert(data.message);
           }
       })
       .catch(error => console.error('Error:', error));
@@ -52,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
       .then(response => response.json())
       .then(data => {
           if (data.success) {
-              window.location.href = 'login.html'; // Redirect to login page after successful signup
+              window.location.href = 'login.html';
           } else {
               alert('Signup failed');
           }
@@ -65,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const userToken = localStorage.getItem('token');
     if (userToken) {
         const decodedToken = parseJwt(userToken);
-        return decodedToken.role; // return user role from token
+        return decodedToken.role;
     }
     return null;
   }
@@ -99,13 +98,13 @@ document.addEventListener('DOMContentLoaded', function() {
         const author = document.getElementById('author').value;
         const isbn = document.getElementById('isbn').value;
 
-        const userToken = localStorage.getItem('token'); // Get user token for auth
+        const userToken = localStorage.getItem('token'); 
 
         fetch('/api/books/add', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${userToken}` // Pass token for authentication
+                'Authorization': `Bearer ${userToken}`
             },
             body: JSON.stringify({ title, author, isbn }),
         })
@@ -113,7 +112,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(data => {
             if (data.success) {
                 alert('Book added successfully!');
-                fetchBooks(); // Reload book list after adding
+                fetchBooks(); 
             } else {
                 alert('Failed to add book');
             }
@@ -128,14 +127,14 @@ document.addEventListener('DOMContentLoaded', function() {
     fetch('/api/books/view', {
         method: 'GET',
         headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}` // Pass token for authentication
+            'Authorization': `Bearer ${localStorage.getItem('token')}` 
         }
     })
     .then(response => response.json())
     .then(data => {
       const bookList = document.getElementById('bookList');
-      bookList.innerHTML = ''; // Clear previous list
-      window.booksData = data; // Store books for later use
+      bookList.innerHTML = ''; 
+      window.booksData = data; 
 
       // Display all books initially
       displayBooks(data);
@@ -145,7 +144,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function displayBooks(books) {
     const bookList = document.getElementById('bookList');
-    bookList.innerHTML = ''; // Clear previous list
+    bookList.innerHTML = ''; 
     // Dynamically insert books into the list
     books.forEach(book => {
       const li = document.createElement('li');
@@ -193,32 +192,30 @@ document.addEventListener('DOMContentLoaded', function() {
     fetch(`/api/history/borrow/${bookId}`, {
         method: 'POST',
         headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}` // Pass token for authentication
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
     })
     .then(response => response.json())
     .then(data => {
         alert(data.message);
-        fetchBooks(); // Reload book list after borrowing
+        fetchBooks(); 
     })
     .catch(error => console.error('Error:', error));
   }
 
   function showUpdateForm(book) {
     // Set values in the form fields
-    document.getElementById('update-book-id').value = book._id; // Hidden input for book ID
+    document.getElementById('update-book-id').value = book._id; 
     document.getElementById('update-title').value = book.title;
     document.getElementById('update-author').value = book.author;
     document.getElementById('update-isbn').value = book.isbn;
     document.getElementById('update-status').value = book.status;
-
-    // Show the update form (you can use Bootstrap modal or a div)
-    document.getElementById('updateForm').style.display = 'block'; // Show the form
+    document.getElementById('updateForm').style.display = 'block'; 
   }
 
   // Function to update a book
   function updateBook() {
-    const bookId = document.getElementById('update-book-id').value; // Get the book ID
+    const bookId = document.getElementById('update-book-id').value;
     const title = document.getElementById('update-title').value;
     const author = document.getElementById('update-author').value;
     const isbn = document.getElementById('update-isbn').value;
@@ -235,15 +232,15 @@ document.addEventListener('DOMContentLoaded', function() {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.getItem('token')}` // Pass token for authentication
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
         },
         body: JSON.stringify(updatedBook)
     })
     .then(response => response.json())
     .then(data => {
         alert(data.message);
-        fetchBooks(); // Reload book list after updating
-        document.getElementById('updateForm').style.display = 'none'; // Hide the form
+        fetchBooks();
+        document.getElementById('updateForm').style.display = 'none'; 
     })
     .catch(error => console.error('Error:', error));
   }
@@ -255,13 +252,13 @@ document.addEventListener('DOMContentLoaded', function() {
     fetch(`/api/books/remove/${bookId}`, {
         method: 'DELETE',
         headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}` // Pass token for authentication
+            'Authorization': `Bearer ${localStorage.getItem('token')}` 
         }
     })
     .then(response => response.json())
     .then(data => {
         alert(data.message);
-        fetchBooks(); // Reload book list after removal
+        fetchBooks(); 
     })
     .catch(error => console.error('Error:', error));
   }
@@ -270,7 +267,7 @@ document.addEventListener('DOMContentLoaded', function() {
     fetch('/api/members/view', {
         method: 'GET',
         headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}` // Pass token for authentication
+            'Authorization': `Bearer ${localStorage.getItem('token')}` 
         }
     })
     .then(response => {
@@ -285,13 +282,13 @@ document.addEventListener('DOMContentLoaded', function() {
     .then(data => {
         if (data) {
             const memberList = document.getElementById('memberList');
-            memberList.innerHTML = ''; // Clear previous list
+            memberList.innerHTML = '';
 
             // Dynamically insert members into the list
             data.forEach(member => {
                 const li = document.createElement('li');
                 li.className = 'list-group-item';
-                li.textContent = `${member.username} (${member.role})`; // Display member details
+                li.textContent = `${member.username} (${member.role})`;
                 const role = checkUserRole();
               if (role === 'LIBRARIAN') {
                   const updateButton = document.createElement('button');
@@ -321,31 +318,27 @@ document.addEventListener('DOMContentLoaded', function() {
       fetch('/api/members/me', {
           method: 'DELETE',
           headers: {
-              'Authorization': `Bearer ${localStorage.getItem('token')}` // Pass token for authentication
+              'Authorization': `Bearer ${localStorage.getItem('token')}`
           }
       })
       .then(response => response.json())
       .then(data => {
           alert(data.message);
-          // Redirect or reload the page
       })
       .catch(error => console.error('Error:', error));
     });
   }
 
   function showMemberupdate(member) {
-    // Set values in the form fields
-    document.getElementById('update-member-id').value = member._id; // Hidden input for book ID
+    document.getElementById('update-member-id').value = member._id;
     document.getElementById('update-username').value = member.username;
     document.getElementById('update-role').value = member.role;
-
-    // Show the update form (you can use Bootstrap modal or a div)
-    document.getElementById('memberUpdateForm').style.display = 'block'; // Show the form
+    document.getElementById('memberUpdateForm').style.display = 'block';
   }
 
   // Function to update a member
   function updateMember() {
-    const memberId = document.getElementById('update-member-id').value; // Get the member ID
+    const memberId = document.getElementById('update-member-id').value;
     const username = document.getElementById('update-username').value;
     const role = document.getElementById('update-role').value;
 
@@ -358,15 +351,15 @@ document.addEventListener('DOMContentLoaded', function() {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.getItem('token')}` // Pass token for authentication
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
         },
         body: JSON.stringify(updatedMember)
     })
     .then(response => response.json())
     .then(data => {
         alert(data.message);
-        fetchMembers(); // Reload member list after updating
-        document.getElementById('memberUpdateForm').style.display = 'none'; // Hide the form
+        fetchMembers();
+        document.getElementById('memberUpdateForm').style.display = 'none';
     })
     .catch(error => console.error('Error:', error));
   }
@@ -378,22 +371,21 @@ document.addEventListener('DOMContentLoaded', function() {
       fetch(`/api/members/${memberId}`, {
           method: 'DELETE',
           headers: {
-              'Authorization': `Bearer ${localStorage.getItem('token')}` // Pass token for authentication
+              'Authorization': `Bearer ${localStorage.getItem('token')}`
           }
       })
       .then(response => response.json())
       .then(data => {
           alert(data.message);
-          fetchMembers(); // Reload member list after removal
+          fetchMembers();
       })
       .catch(error => console.error('Error:', error));
   }
 
-  // Call the function to fetch members when the page loads
   document.addEventListener('DOMContentLoaded', () => {
     const role = checkUserRole();
     if (role === 'LIBRARIAN') {
-        fetchMembers(); // Fetch members if the user is a librarian
+        fetchMembers();
     } else {
         document.getElementById('membersSection').style.display = 'none';
         document.getElementById('noAccessMessage').style.display = 'block';
@@ -405,13 +397,13 @@ document.addEventListener('DOMContentLoaded', function() {
     fetch('/api/history/view', {
         method: 'GET',
         headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}` // Pass token for authentication
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
     })
     .then(response => response.json())
     .then(data => {
         const historyList = document.getElementById('historyList');
-        historyList.innerHTML = ''; // Clear previous history
+        historyList.innerHTML = '';
 
         data.forEach(record => {
             const li = document.createElement('li');
